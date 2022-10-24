@@ -1,38 +1,29 @@
+import Head from 'next/head';
 import AllPosts from '../../components/Posts/AllPosts';
+import { getAllPosts } from '../../helpers/postsUtil';
 
-const AllPostsPage = () => {
-  const DUMMY_POSTS = [
-    {
-      slug: 'getting-started-with-nextjs',
-      title: 'Getting Started With NextJS',
-      image: 'getting-started-nextjs.jpg',
-      excerpt: 'NextJS is a fullstack react framework',
-      date: '2022-10-20',
-    },
-    {
-      slug: 'getting-started-with-nextjs2',
-      title: 'Getting Started With NextJS',
-      image: 'getting-started-nextjs.jpg',
-      excerpt: 'NextJS is a fullstack react framework',
-      date: '2022-10-20',
-    },
-    {
-      slug: 'getting-started-with-nextjs3',
-      title: 'Getting Started With NextJS',
-      image: 'getting-started-nextjs.jpg',
-      excerpt: 'NextJS is a fullstack react framework',
-      date: '2022-10-20',
-    },
-    {
-      slug: 'getting-started-with-nextjs4',
-      title: 'Getting Started With NextJS',
-      image: 'getting-started-nextjs.jpg',
-      excerpt: 'NextJS is a fullstack react framework',
-      date: '2022-10-20',
-    },
-  ];
+const AllPostsPage = (props) => {
+  const { posts } = props;
 
-  return <AllPosts posts={DUMMY_POSTS} />;
+  return (
+    <>
+      <Head>
+        <title>All Posts</title>
+        <meta name="description" content="All Tech News" />
+      </Head>
+      <AllPosts posts={posts} />
+    </>
+  );
+};
+
+export const getStaticProps = () => {
+  const allPosts = getAllPosts();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
 };
 
 export default AllPostsPage;
