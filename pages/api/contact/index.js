@@ -26,7 +26,7 @@ const handler = async (req, res) => {
 
     try {
       client = await MongoClient.connect(
-        'mongodb+srv://kbiganashvili:y29P5UQv5wWdmJJm@cluster0.s1lrivz.mongodb.net/my-site?retryWrites=true&w=majority'
+        `mongodb+srv://${process.env.dbUser}:${process.env.dbPassword}@${process.env.dbCluster}.s1lrivz.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`
       );
     } catch (error) {
       res.status(500).json({ message: 'Connection Could Not Be Established' });
